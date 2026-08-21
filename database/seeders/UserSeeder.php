@@ -19,5 +19,13 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('admin123'),   
         ]);
+
+        foreach (range(1, 10) as $i) {
+            User::create([
+                'user_title' => "User $i",
+                'username' => "user$i",
+                'password' => Hash::make('user123'),
+            ]);
+        }
     }
 }
