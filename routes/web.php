@@ -24,3 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/users/add', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
 
 });
+
+Route::get('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+
+Route::put('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
