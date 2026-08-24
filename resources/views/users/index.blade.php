@@ -8,6 +8,8 @@
 
     <h2>Admin Users</h2>
     
+    <a href="{{ route('users.create') }}">Add New User</a><br>
+
     <!-- logout link -->
     <a href="{{ route('logout') }}">Log Out</a>
     <hr>
