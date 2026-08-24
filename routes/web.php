@@ -19,4 +19,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('users/clear-all', [App\Http\Controllers\UserController::class, 'bulkDelete'])->name('users.bulk_delete');
 
+    Route::get('/users/add', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+
+    Route::post('/users/add', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+
 });
