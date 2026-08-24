@@ -50,7 +50,7 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->user_title }}</td>
                     <td>
-                        <a href="#">Edit</a>
+                        <a href="{{ route('users.edit', $user->id) }}">Edit</a>
 
                         <a href="#" style="color: red;">Delete</a>
                     </td>

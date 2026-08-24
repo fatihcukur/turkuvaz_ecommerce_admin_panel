@@ -58,4 +58,43 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'username' => [
+                'required',
+                'alpha_num',
+                'unique:users,username,' . $id
+            ],
+            'user_title' => ['required'],
+            'password' => ['nullable', 'min:6'],
+        ], [
+            'username.required' => 'Username field is required',
+            'username.alpha_num' => 'Username filed may only contain letters and numbers, and cannot contain spaces',
+            'username.unique' => 'This username has already been taken',
+            'user_title.required' => 'User title field is required',
+            'password.min' => 'Password must be at least 6 characters',
+        ]);
+
+        $user->username = $request->username;
+        $user->user_title = $request->user_title;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('users.index');
+    }
 }
