@@ -46,7 +46,7 @@
                     </td>
                     <td>
                       
-                        <a href="#">Edit</a>
+                        <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
                         
                         <form action="#" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf
