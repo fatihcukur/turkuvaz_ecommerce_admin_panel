@@ -23,6 +23,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/users/add', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
 
+    Route::get('/categories/add', [App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
+
+    Route::post('/categories/add', [App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
+
 });
 
 Route::get('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
