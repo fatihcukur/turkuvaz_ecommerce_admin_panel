@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/users/add', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
 
+    Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
+
     Route::get('/categories/add', [App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
 
     Route::post('/categories/add', [App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
@@ -34,3 +36,4 @@ Route::get('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'edi
 Route::put('/users/edit/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 
 Route::delete('users/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+

@@ -32,7 +32,15 @@ class CategoryController extends Controller
             'status' => $request->status,    
         ]);
 
-        return redirect()->route('categories.create')->with('success', 'Category successfuly added');
+        return redirect()->route('categories.index')->with('success', 'Category successfuly added');
+    }
+
+    public function index()
+    {
+        $categories = Category::all();
+
+        return view('categories.index', compact('categories'));
+    
     }
 
 }
