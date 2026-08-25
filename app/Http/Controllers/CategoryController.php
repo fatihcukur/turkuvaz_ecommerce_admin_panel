@@ -43,4 +43,35 @@ class CategoryController extends Controller
     
     }
 
+    public function edit(int $id)
+    {
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $request->validate([
+            'category_title' => 'required|unique:categories,category_title,' . $id,
+            'category_description' => 'required',
+            'status' => 'required|boolean'
+        ], [
+            'category_title.required' => 'Category title is required',
+            'category_title.unique' => 'This category title is already taken',
+            'category_description.required' => 'Category description is required',
+            'status.required' => 'Status selection is required'
+        ]);
+
+        $category->category_title = $request->category_title;
+        $category->category_description = $request->category_description;
+        $category->status = $request->status;
+        $category->save();
+
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
+
+
+    }
+
 }
