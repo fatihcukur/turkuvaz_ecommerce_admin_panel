@@ -48,7 +48,7 @@
                       
                         <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
                         
-                        <form action="#" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" style="color: red;">Delete</button>
