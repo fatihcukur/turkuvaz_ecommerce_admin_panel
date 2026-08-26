@@ -45,9 +45,9 @@
                         @endif
                     </td>
                     <td>
-                        <a href="#">Edit</a>
+                        <a href="{{ route('products.edit', $product->id) }}">Edit</a>
                         
-                        <form action="#" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" style="color: red;">Delete</button>
