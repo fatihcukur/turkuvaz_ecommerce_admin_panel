@@ -40,4 +40,42 @@ class ProductController extends Controller
 
         return view('products.index', compact('products'));
     }
+
+    public function edit(int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $categories = Category::where('status', 1)->get();
+
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'product_title' => 'required',
+            'barcode' => 'required|unique:products,barcode,' . $id,
+            'product_status' => 'required|boolean',
+            'product_category_id' => 'nullable'
+        ]);
+
+        $product->product_title = $request->product_title;
+        $product->barcode = $request->barcode;
+        $product->product_status = $request->product_status;
+        $product->product_category_id = $request->product_category_id;
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfuly');
+    }
+
+    public function destroy(int $id)
+    {
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfuly');
+    }
 }
