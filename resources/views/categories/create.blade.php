@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Category</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Add New Category</h2>
+    <a href="{{ route('categories.index') }}" style="display:inline-block; margin-bottom: 20px;">← Back to Category List</a>
+    <hr>
 
     @if (session('success'))
         <div style="color: green;">{{ session('success') }}</div>
@@ -47,5 +45,4 @@
         <button type="submit">Save Category</button>
     </form>
 
-</body>
-</html>
+@endsection

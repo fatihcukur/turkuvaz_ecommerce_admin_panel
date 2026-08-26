@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Product</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Edit Product: {{ $product->product_title }}</h2>
 
@@ -59,5 +55,4 @@
         <button type="submit">Update Product</button>
     </form>
 
-</body>
-</html>
+@endsection

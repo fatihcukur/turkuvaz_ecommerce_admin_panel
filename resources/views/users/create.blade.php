@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add New User</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Add New User</h2>
 
-    <a href="{{ route('users.index') }}">Back to List</a>
+    <a href="{{ route('users.index') }}" style="display:inline-block; margin-bottom: 20px;">← Back to Product List</a>
     <hr>
 
     @if ($errors->any())
@@ -44,5 +40,4 @@
         <button type="submit">Save</button>
     </form>
 
-</body>
-</html>
+ @endsection

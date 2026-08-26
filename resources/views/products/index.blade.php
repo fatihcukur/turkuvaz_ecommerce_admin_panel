@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Product List</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Product List</h2>
 
-    <a href="{{ route('products.create') }}">Add New Product</a><br>
-    <a href="{{ route('categories.index') }}">Go to Categories</a>
-    <hr>
+    <a href="{{ route('products.create') }}" class="btn-add">+ Add New Product</a>
 
     @if (session('success'))
         <div style="color: green; margin-bottom: 10px;">
@@ -18,14 +12,14 @@
         </div>
     @endif
 
-    <table border="1" cellpadding="10">
+    <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Product Title</th>
+                <th>ProductCategoryId</th>
+                <th>ProductTitle</th>
                 <th>Category</th>
                 <th>Barcode</th>
-                <th>Status</th>
+                <th>ProductStatus</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -35,22 +29,20 @@
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->product_title }}</td>
                     <td>{{ optional($product->category)->category_title ?? 'No Category' }}</td>
-                    
                     <td>{{ $product->barcode }}</td>
                     <td>
                         @if($product->product_status == 1)
-                            <span style="color: green;">Active</span>
+                            <span class="status-active">Active</span>
                         @else
-                            <span style="color: gray;">Passive</span>
+                            <span class="status-passive">Passive</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('products.edit', $product->id) }}">Edit</a>
-                        
-                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                        <a href="{{ route('products.edit', $product->id) }}">Edit</a> |
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;" onsubmit="openDeleteModal(event, this);">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" style="color: red;">Delete</button>
+                            <button type="submit" style="color: red; border:none; background:none; cursor:pointer;">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -58,5 +50,4 @@
         </tbody>
     </table>
 
-</body>
-</html>
+@endsection

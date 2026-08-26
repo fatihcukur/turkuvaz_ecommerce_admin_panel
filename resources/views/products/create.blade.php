@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Product</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Add New Product</h2>
 
-    <a href="{{ route('categories.index') }}">Go to Categories</a>
+    <a href="{{ route('products.index') }}" style="display:inline-block; margin-bottom: 20px;">← Back to Product List</a>
     <hr>
 
     @if (session('success'))
@@ -62,5 +58,4 @@
         <button type="submit">Save Product</button>
     </form>
 
-</body>
-</html>
+@endsection

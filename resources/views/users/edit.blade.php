@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit User</title>
-</head>
-<body>
+@extends('layout')
 
-    <h2>Edit User: {{ $user->user_title }}</h2>
+@section('content')
+
+    <h2>Edit User: {{ $user->username }}</h2>
 
     <a href="{{ route('users.index') }}">Back to List</a>
     <hr>
@@ -43,5 +39,4 @@
         <button type="submit">Update</button>
     </form>
 
-</body>
-</html>
+@endsection

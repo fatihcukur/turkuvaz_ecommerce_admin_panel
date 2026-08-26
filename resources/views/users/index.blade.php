@@ -1,69 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User List</title>
-</head>
-<body>
+@extends('layout')
 
-    <h2>Admin Users</h2>
-    
-    <a href="{{ route('users.create') }}">Add New User</a><br>
+@section('content')
 
-    <!-- logout link -->
-    <a href="{{ route('logout') }}">Log Out</a>
-    <hr>
+    <h2>User List</h2>
 
-    @if ($errors->any())
-        <div style="color: red;">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
-        </div>
+    <a href="{{ route('users.create') }}" class="btn-add">+ Add New User</a>
+
+    @if (session('success'))
+        <div style="color: green; margin-bottom: 10px;">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('users.bulk_delete') }}" method="POST">
-        @csrf
-
-        <button type="submit" style="margin-bottom: 10px; color: red;">Delete Selected</button>
-
-
-    <table border="1" cellpadding="10">
+    <table>
         <thead>
             <tr>
-                <th>Select</th>
                 <th>ID</th>
                 <th>Username</th>
-                <th>User Title</th>
+                <th>UserTitle</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-
             @foreach ($users as $user)
                 <tr>
-                    <td>
-                        <input type="checkbox" name="user_ids[]" value="{{ $user->id }}">
-                    </td>
-
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->user_title }}</td>
                     <td>
-                        <a href="{{ route('users.edit', $user->id) }}">Edit</a>
-
-                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                        <a href="{{ route('users.edit', $user->id) }}">Edit</a> |
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="openDeleteModal(event, this);">
                             @csrf
                             @method('DELETE')
-
-                            <button type="submit" style="color: red;">Delete</button>
+                            <button type="submit" style="color: red; border:none; background:none; cursor:pointer;">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</form>
 
-</body>
-</html>
+@endsection
