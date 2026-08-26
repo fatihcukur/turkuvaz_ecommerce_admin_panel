@@ -34,6 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/categories/add', [App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
 
     Route::delete('/categories/delete/{id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
+    //products
+    Route::get('/products/add', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+    Route::post('/products/add', [App\Http\Controllers\ProductController::class, 'store'])->name('products.store');
 
 });
 
