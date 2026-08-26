@@ -1,31 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Category List</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Category List</h2>
 
-    <a href="{{ route('categories.create') }}">Add New Category</a><br>
-    
-    <a href="{{ route('users.index') }}">Go to Users</a>
-    <hr>
+    <a href="{{ route('categories.create') }}" class="btn-add">+ Add New Category</a>
 
-  
     @if (session('success'))
-        <div style="color: green; margin-bottom: 10px;">
-            {{ session('success') }}
-        </div>
+        <div style="color: green; margin-bottom: 10px;">{{ session('success') }}</div>
     @endif
 
-    <table border="1" cellpadding="10">
+    <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Category Title</th>
-                <th>Description</th>
+                <th>CategoryTitle</th>
+                <th>CategoryDescription</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
@@ -37,21 +27,18 @@
                     <td>{{ $category->category_title }}</td>
                     <td>{{ $category->category_description }}</td>
                     <td>
-
                         @if($category->status == 1)
-                            <span style="color: green;">Active</span>
+                            <span class="status-active">Active</span>
                         @else
-                            <span style="color: gray;">Passive</span>
+                            <span class="status-passive">Passive</span>
                         @endif
                     </td>
                     <td>
-                      
-                        <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                        
-                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                        <a href="{{ route('categories.edit', $category->id) }}">Edit</a> |
+                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;" onsubmit="openDeleteModal(event, this);">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" style="color: red;">Delete</button>
+                            <button type="submit" style="color: red; border:none; background:none; cursor:pointer;">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -59,5 +46,4 @@
         </tbody>
     </table>
 
-</body>
-</html>
+@endsection

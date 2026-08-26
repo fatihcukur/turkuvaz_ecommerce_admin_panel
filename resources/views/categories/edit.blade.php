@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Category</title>
-</head>
-<body>
+@extends('layout')
+
+@section('content')
 
     <h2>Edit Category: {{ $category->category_title }}</h2>
 
@@ -47,5 +43,4 @@
         <button type="submit">Update Category</button>
     </form>
 
-</body>
-</html>
+@endsection
