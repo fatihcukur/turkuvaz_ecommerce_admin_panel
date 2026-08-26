@@ -31,6 +31,13 @@ class ProductController extends Controller
             'product_category_id' => $request->product_category_id,
         ]);
 
-        return redirect()->route('products.create')->with('success', 'Product added successfuly');
+        return redirect()->route('products.index')->with('success', 'Product added successfuly');
+    }
+
+    public function index()
+    {
+        $products = Product::with('category')->get();
+
+        return view('products.index', compact('products'));
     }
 }

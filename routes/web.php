@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/categories/delete/{id}', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
     //products
+    Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products.index');
     Route::get('/products/add', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
     Route::post('/products/add', [App\Http\Controllers\ProductController::class, 'store'])->name('products.store');
 
