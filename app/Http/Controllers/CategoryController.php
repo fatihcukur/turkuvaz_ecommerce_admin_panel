@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -77,6 +78,8 @@ class CategoryController extends Controller
     public function destroy(int $id)
     {
         $category = Category::findOrFail($id);
+
+        Product::where('product_category_id', $id)->update(['product_category_id' => null]);
 
         $category->delete();
 
