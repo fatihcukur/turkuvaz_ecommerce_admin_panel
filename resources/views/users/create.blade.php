@@ -4,7 +4,7 @@
 
     <h2>Add New User</h2>
 
-    <a href="{{ route('users.index') }}" style="display:inline-block; margin-bottom: 20px;">← Back to Product List</a>
+    <a href="{{ route('users.index') }}" style="display:inline-block; margin-bottom: 20px;">← Back to User List</a>
     <hr>
 
     @if ($errors->any())
